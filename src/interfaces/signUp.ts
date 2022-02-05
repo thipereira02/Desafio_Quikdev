@@ -1,4 +1,4 @@
-interface UserData {
+interface SignUpData {
     name: string,
     email: string,
     password: string,
@@ -11,4 +11,4 @@ interface UserData {
     description: string,
 }
 
-export default UserData;
+export default SignUpData;

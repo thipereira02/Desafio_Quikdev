@@ -15,4 +15,10 @@ export default class Session extends BaseEntity {
 
   @ManyToOne(() => User, (u) => u.sessions)
     user: User;
+
+  static async createNew(userId: number, token: string) {
+    const session = this.create({ userId, token });
+    await session.save();
+    return session;
+  }
 }

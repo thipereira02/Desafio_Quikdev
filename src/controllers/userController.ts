@@ -2,11 +2,11 @@
 import { Request, Response } from 'express';
 
 import * as userService from '../services/userService';
-import UserData from '../interfaces/user';
+import SignUpData from '../interfaces/signUp';
 
 export async function createNewUser(req: Request, res: Response) {
   try {
-    const userData = req.body as UserData;
+    const userData = req.body as SignUpData;
     const user = await userService.createUser(userData);
     if (user === undefined) return res.sendStatus(400);
     if (user === false) return res.sendStatus(409);

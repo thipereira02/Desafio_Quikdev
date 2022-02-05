@@ -42,7 +42,7 @@ export default class User extends BaseEntity {
   @OneToMany(() => Session, (s) => s.user)
     sessions: Session[];
 
-  static async createNew(name:string, email:string, password:string, username:string, birthdate:string, address:string, addressNumber:string, primaryPhone:string, description:string) {
+  static async newUser(name:string, email:string, password:string, username:string, birthdate:string, address:string, addressNumber:string, primaryPhone:string, description:string) {
     const EmailExistsOrUsername = await this.validateDuplicateEmail(email, username);
     if (EmailExistsOrUsername) return false;
 
@@ -73,5 +73,22 @@ export default class User extends BaseEntity {
 
   static hashPassword(password: string) {
     return bcrypt.hashSync(password, 12);
+  }
+
+  static async findByEmailAndPassword(email: string, password: string) {
+    const user = await this.findOne({ email });
+
+    if (user && bcrypt.compareSync(password, user.password)) {
+      return user;
+    }
+
+    return false;
+  }
+
+  getMainAtributes() {
+    return {
+      id: this.id,
+      email: this.email,
+    };
   }
 }

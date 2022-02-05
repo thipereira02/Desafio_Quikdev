@@ -3,16 +3,18 @@ import { getRepository } from 'typeorm';
 import dayjs from 'dayjs';
 
 import User from '../entities/User';
-import UserData from '../interfaces/user';
-import { userSchema } from '../schemas/userSchema';
+import SignInData from '../interfaces/signUp';
+import LogInData from '../interfaces/logIn';
+import { signUpSchema } from '../schemas/signUpSchema';
+import { logInSchema } from '../schemas/logInSchema';
 import editPhoneNumber from '../utils/editPhoneNumber';
 
-export async function createUser(userData: UserData) {
+export async function createUser(userData: SignInData) {
   const { name, email, password, username, birthdate, address, addressNumber, primaryPhone, description } = userData;
-  const bodyIsValid = userSchema.validate(userData);
+  const bodyIsValid = signUpSchema.validate(userData);
   if (bodyIsValid.error !== undefined) return undefined;
 
-  const user = await User.createNew(name, email, password, username, birthdate, address, addressNumber, primaryPhone, description);
+  const user = await User.newUser(name, email, password, username, birthdate, address, addressNumber, primaryPhone, description);
 
   return user;
 }
