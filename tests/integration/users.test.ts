@@ -48,7 +48,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(201);
   });
@@ -66,7 +66,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -84,7 +84,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -102,7 +102,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -122,7 +122,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(409);
   });
@@ -140,7 +140,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -160,7 +160,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(409);
   });
@@ -178,7 +178,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -196,7 +196,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -214,7 +214,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -232,7 +232,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -250,7 +250,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -268,7 +268,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -286,7 +286,7 @@ describe('POST /user', () => {
       description: 'A very experient user',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });
@@ -304,7 +304,7 @@ describe('POST /user', () => {
       description: '',
     };
 
-    const response = await supertest(app).post('/user').send(body);
+    const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
   });

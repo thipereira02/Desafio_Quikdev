@@ -12,8 +12,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.post('/signUp', userController.createNewUser);
 app.get('/user/:id', userController.getUserById);
-app.post('/user', userController.createNewUser);
 app.delete('/user/:id', userController.deleteUser);
 
 export async function init() {
