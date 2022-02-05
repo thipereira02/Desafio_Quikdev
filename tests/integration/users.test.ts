@@ -26,7 +26,7 @@ describe("GET /users", () => {
     expect(response.body).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          email: user.email
+          name: user.name
         })
       ])
     );

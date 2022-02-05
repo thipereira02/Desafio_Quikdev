@@ -6,8 +6,26 @@ export default class User {
   id: number;
 
   @Column()
-  email: string;
+  name: string;
 
   @Column()
-  password: string;
+  username: string;
+
+  @Column()
+  birthdate: string;
+
+  @Column()
+  address: string;
+
+  @Column()
+  addressNumber: string;
+
+  @Column()
+  primaryPhone: string;
+
+  @Column()
+  description: string;
+
+  @Column()
+  createdAt: string;
 }
