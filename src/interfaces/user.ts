@@ -1,5 +1,8 @@
 interface UserData {
     name: string,
+    email: string,
+    password: string,
+    confirmPassword: string,
     username: string,
     birthdate: string,
     address: string,

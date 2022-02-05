@@ -25,22 +25,13 @@ export async function getUser(id: number) {
 }
 
 export async function createUser(userData: UserData) {
-  const { username } = userData;
+  const { name, email, password, username, birthdate, address, addressNumber, primaryPhone, description } = userData;
   const bodyIsValid = userSchema.validate(userData);
   if (bodyIsValid.error !== undefined) return undefined;
 
-  const usernameInUse = await getRepository(User)
-    .find({
-      where: [
-        { username },
-      ],
-    });
-  if (usernameInUse.length !== 0) return false;
+  const user = await User.createNew(name, email, password, username, birthdate, address, addressNumber, primaryPhone, description);
 
-  const newUser = getRepository(User).create(userData);
-  await newUser.save();
-
-  return newUser;
+  return user;
 }
 
 export async function deleteUser(id: number) {

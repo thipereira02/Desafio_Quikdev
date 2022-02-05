@@ -1,4 +1,6 @@
+/* eslint-disable consistent-return */
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import bcrypt from 'bcrypt';
 
 import Session from './Session';
 
@@ -39,4 +41,37 @@ export default class User extends BaseEntity {
 
   @OneToMany(() => Session, (s) => s.user)
     sessions: Session[];
+
+  static async createNew(name:string, email:string, password:string, username:string, birthdate:string, address:string, addressNumber:string, primaryPhone:string, description:string) {
+    const EmailExistsOrUsername = await this.validateDuplicateEmail(email, username);
+    if (EmailExistsOrUsername) return false;
+
+    const hashedPassword = this.hashPassword(password);
+
+    const newUser = this.create({ name, email, password: hashedPassword, username, birthdate, address, addressNumber, primaryPhone, description });
+    await newUser.save();
+
+    return newUser;
+  }
+
+  static async validateDuplicateEmail(email: string, username: string) {
+    const checkEmail = await this.findOne({ email });
+    const checkUsername = await this.findOne({ username });
+
+    if (checkEmail || checkUsername) {
+      return true;
+    }
+  }
+
+  static async checkUsername(username: string) {
+    const user = await this.findOne({ username });
+
+    if (user) {
+      return true;
+    }
+  }
+
+  static hashPassword(password: string) {
+    return bcrypt.hashSync(password, 12);
+  }
 }
