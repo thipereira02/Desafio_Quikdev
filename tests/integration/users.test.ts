@@ -18,26 +18,18 @@ afterAll(async () => {
   await getConnection().close();
 });
 
-describe('GET /users', () => {
-  it('should answer with text "OK!" and status 200', async () => {
+describe('GET /user', () => {
+  it('should answer with status 200 when user is returned', async () => {
     const user = await createUser();
 
-    const response = await supertest(app).get('/users');
-
-    expect(response.body).toEqual(
-      expect.arrayContaining([
-        expect.objectContaining({
-          name: user.name,
-          username: user.username,
-          birthdate: user.birthdate,
-          address: user.address,
-          addressNumber: user.addressNumber,
-          primaryPhone: user.primaryPhone,
-          description: user.description,
-        }),
-      ]),
-    );
+    const response = await supertest(app).get(`/user/${user.id}`);
 
     expect(response.status).toBe(200);
+  });
+
+  it('should answer with status 404 when user doesnt exists', async () => {
+    const response = await supertest(app).get('/user/1');
+
+    expect(response.status).toBe(404);
   });
 });

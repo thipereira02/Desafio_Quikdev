@@ -9,7 +9,7 @@ export async function createUser() {
     birthdate: '10/10/10',
     address: 'Rua do Pássaro',
     addressNumber: '10A',
-    primaryPhone: 1012345678,
+    primaryPhone: '1012345678',
     description: 'A very experient user',
   });
 
