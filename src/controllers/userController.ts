@@ -29,3 +29,15 @@ export async function createNewUser(req: Request, res: Response) {
     res.sendStatus(500);
   }
 }
+
+export async function deleteUser(req: Request, res: Response) {
+  try {
+    const user = await userService.deleteUser(Number(req.params.id));
+    if (!user) return res.sendStatus(404);
+
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+}

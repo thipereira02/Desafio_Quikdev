@@ -14,6 +14,7 @@ app.use(express.json());
 
 app.get('/user/:id', userController.getUserById);
 app.post('/user', userController.createNewUser);
+app.delete('/user/:id', userController.deleteUser);
 
 export async function init() {
   await connectDatabase();

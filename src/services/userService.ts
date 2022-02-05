@@ -42,3 +42,17 @@ export async function createUser(userData: UserData) {
 
   return newUser;
 }
+
+export async function deleteUser(id: number) {
+  const user = await getRepository(User)
+    .find({
+      where: [
+        { id },
+      ],
+    });
+  if (user.length === 0) return false;
+
+  await getRepository(User).remove(user);
+
+  return true;
+}
