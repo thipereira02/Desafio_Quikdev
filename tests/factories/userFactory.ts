@@ -5,6 +5,8 @@ import User from '../../src/entities/User';
 export async function createUser() {
   const user = getRepository(User).create({
     name: 'Teste',
+    email: 'teste@teste.com',
+    password: '123456',
     username: 'teste123',
     birthdate: '10/10/10',
     address: 'Rua do Pássaro',
