@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+
+import Session from './Session';
 
 @Entity('users')
 export default class User extends BaseEntity {
@@ -7,6 +9,12 @@ export default class User extends BaseEntity {
 
   @Column()
     name: string;
+
+  @Column()
+    email: string;
+
+  @Column()
+    password: string;
 
   @Column()
     username: string;
@@ -28,4 +36,7 @@ export default class User extends BaseEntity {
 
   @Column()
     createdAt: string;
+
+  @OneToMany(() => Session, (s) => s.user)
+    sessions: Session[];
 }
