@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/user/:id', userController.getUserById);
+app.post('/user', userController.createNewUser);
 
 export async function init() {
   await connectDatabase();

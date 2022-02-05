@@ -21,7 +21,7 @@ export default class User extends BaseEntity {
     addressNumber: string;
 
   @Column()
-    primaryPhone: number;
+    primaryPhone: string;
 
   @Column()
     description: string;
