@@ -18,23 +18,7 @@ afterAll(async () => {
   await getConnection().close();
 });
 
-describe('GET /user/:id', () => {
-  it('should answer with status 200 when user is returned', async () => {
-    const user = await createUser();
-
-    const response = await supertest(app).get(`/user/${user.id}`);
-
-    expect(response.status).toBe(200);
-  });
-
-  it('should answer with status 404 when user doesnt exists', async () => {
-    const response = await supertest(app).get('/user/1');
-
-    expect(response.status).toBe(404);
-  });
-});
-
-describe('POST /user', () => {
+describe('POST /signUp', () => {
   it('should answer with status 201 when user is created', async () => {
     const body = {
       name: 'Teste',
@@ -307,21 +291,5 @@ describe('POST /user', () => {
     const response = await supertest(app).post('/signUp').send(body);
 
     expect(response.status).toBe(400);
-  });
-});
-
-describe('DELETE /user/:id', () => {
-  it('should answer with status 200 when user is returned', async () => {
-    const user = await createUser();
-
-    const response = await supertest(app).delete(`/user/${user.id}`);
-
-    expect(response.status).toBe(200);
-  });
-
-  it('should answer with status 404 when user doesnt exists', async () => {
-    const response = await supertest(app).delete('/user/1');
-
-    expect(response.status).toBe(404);
   });
 });

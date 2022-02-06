@@ -6,12 +6,9 @@ import * as sessionService from '../services/sessionService';
 export async function deleteSession(req: Request, res: Response) {
   try {
     const authHeader = req.header('Authorization');
-
     const token = authHeader?.replace('Bearer ', '');
-    if (!token) return res.sendStatus(401);
 
-    const user = await sessionService.deleteSession(token);
-    if (!user) return res.sendStatus(404);
+    await sessionService.deleteSession(token);
 
     res.sendStatus(200);
   } catch (err) {
