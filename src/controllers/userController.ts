@@ -29,3 +29,18 @@ export async function getUserById(req: Request, res: Response) {
     res.sendStatus(500);
   }
 }
+
+export async function updateUserData(req: Request, res: Response) {
+  try {
+    const userData = req.body as SignUpData;
+    const user = await userService.getUserToUpdate(Number(req.params.id), userData);
+    if (user === false) return res.sendStatus(404);
+    if (user === undefined) return res.sendStatus(400);
+    if (user === null) return res.sendStatus(409);
+
+    return res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(500);
+  }
+}

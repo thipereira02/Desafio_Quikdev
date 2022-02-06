@@ -18,6 +18,7 @@ app.use(express.json());
 app.post('/signUp', userController.createNewUser);
 app.post('/login', authController.createNewSession);
 app.get('/user/:id', tokenValidationMiddleware, userController.getUserById);
+app.put('/user/:id', tokenValidationMiddleware, userController.updateUserData);
 app.delete('/logout', tokenValidationMiddleware, sessionController.deleteSession);
 
 export async function init() {

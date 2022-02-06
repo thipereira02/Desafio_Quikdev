@@ -1,8 +1,9 @@
 /* eslint-disable consistent-return */
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, Not } from 'typeorm';
 import bcrypt from 'bcrypt';
 
 import Session from './Session';
+import SignUpData from '../interfaces/signUp';
 
 @Entity('users')
 export default class User extends BaseEntity {
@@ -83,6 +84,31 @@ export default class User extends BaseEntity {
     }
 
     return false;
+  }
+
+  static async getUserById(id: number) {
+    const user = await this.findOne({ id });
+    return user;
+  }
+
+  static async ableToUpdate(id:number, email: string, username: string) {
+    const able = await this.find({
+      where: [
+        { email, id: Not(id) },
+        { username, id: Not(id) },
+      ],
+    });
+    if (able.length === 0) return true;
+    return false;
+  }
+
+  static async updateData(id: number, userData: SignUpData) {
+    await this
+      .createQueryBuilder()
+      .update(User)
+      .set(userData)
+      .where({ id })
+      .execute();
   }
 
   getMainAtributes() {

@@ -1,18 +1,16 @@
 /* eslint-disable consistent-return */
-import { getRepository } from 'typeorm';
 import dayjs from 'dayjs';
 
 import User from '../entities/User';
-import SignInData from '../interfaces/signUp';
-import LogInData from '../interfaces/logIn';
-import { signUpSchema } from '../schemas/signUpSchema';
-import { logInSchema } from '../schemas/logInSchema';
+import SignUpData from '../interfaces/signUp';
 import editPhoneNumber from '../utils/editPhoneNumber';
+import validateUserBody from '../utils/validateUserBody';
 
-export async function createUser(userData: SignInData) {
+export async function createUser(userData: SignUpData) {
   const { name, email, password, username, birthdate, address, addressNumber, primaryPhone, description } = userData;
-  const bodyIsValid = signUpSchema.validate(userData);
-  if (bodyIsValid.error !== undefined) return undefined;
+
+  const validate = validateUserBody(userData);
+  if (!validate) return undefined;
 
   const user = await User.newUser(name, email, password, username, birthdate, address, addressNumber, primaryPhone, description);
 
@@ -20,9 +18,10 @@ export async function createUser(userData: SignInData) {
 }
 
 export async function getUser(id: number) {
-  const user = await getRepository(User).findOne({ id });
+  const user = await User.getUserById(id);
   if (!user) return false;
   const phone = editPhoneNumber(user.primaryPhone);
+
   return {
     id: user.id,
     name: user.name,
@@ -34,4 +33,19 @@ export async function getUser(id: number) {
     description: user.description,
     createdAt: dayjs(user.createdAt).format('DD/MM/YYYY'),
   };
+}
+
+export async function getUserToUpdate(id: number, userData: SignUpData) {
+  const user = await User.getUserById(id);
+  if (!user) return false;
+
+  const validate = validateUserBody(userData);
+  if (!validate) return undefined;
+
+  const ableToUpdate = await User.ableToUpdate(id, userData.email, userData.username);
+  if (!ableToUpdate) return null;
+
+  await User.updateData(id, userData);
+
+  return true;
 }
