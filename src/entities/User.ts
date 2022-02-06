@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany, Not } fr
 import bcrypt from 'bcrypt';
 
 import Session from './Session';
-import SignUpData from '../interfaces/signUp';
+import UpdateData from '../interfaces/update';
 
 @Entity('users')
 export default class User extends BaseEntity {
@@ -102,7 +102,7 @@ export default class User extends BaseEntity {
     return false;
   }
 
-  static async updateData(id: number, userData: SignUpData) {
+  static async updateData(id: number, userData: UpdateData) {
     await this
       .createQueryBuilder()
       .update(User)

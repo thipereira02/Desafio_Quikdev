@@ -3,13 +3,14 @@ import dayjs from 'dayjs';
 
 import User from '../entities/User';
 import SignUpData from '../interfaces/signUp';
+import UpdateData from '../interfaces/update';
 import editPhoneNumber from '../utils/editPhoneNumber';
-import validateUserBody from '../utils/validateUserBody';
+import { validateSignUpBody, validateUpdateBody } from '../utils/validateBody';
 
 export async function createUser(userData: SignUpData) {
   const { name, email, password, username, birthdate, address, addressNumber, primaryPhone, description } = userData;
 
-  const validate = validateUserBody(userData);
+  const validate = validateSignUpBody(userData);
   if (!validate) return undefined;
 
   const user = await User.newUser(name, email, password, username, birthdate, address, addressNumber, primaryPhone, description);
@@ -35,11 +36,11 @@ export async function getUser(id: number) {
   };
 }
 
-export async function getUserToUpdate(id: number, userData: SignUpData) {
+export async function getUserToUpdate(id: number, userData: UpdateData) {
   const user = await User.getUserById(id);
   if (!user) return false;
 
-  const validate = validateUserBody(userData);
+  const validate = validateUpdateBody(userData);
   if (!validate) return undefined;
 
   const ableToUpdate = await User.ableToUpdate(id, userData.email, userData.username);
