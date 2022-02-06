@@ -6,20 +6,17 @@ import 'reflect-metadata';
 
 import connectDatabase from './database';
 
-import * as userController from './controllers/userController';
-import * as authController from './controllers/auth';
-import * as sessionController from './controllers/sessionController';
-import tokenValidationMiddleware from './middlewares/tokenValidationMiddleware';
+import userRouter from './routers/userRouter';
+import authRouter from './routers/authRouter';
+import sessionRouter from './routers/sessionRouter';
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post('/signUp', userController.createNewUser);
-app.post('/login', authController.createNewSession);
-app.get('/user/:id', tokenValidationMiddleware, userController.getUserById);
-app.put('/user/:id', tokenValidationMiddleware, userController.updateUserData);
-app.delete('/logout', tokenValidationMiddleware, sessionController.deleteSession);
+app.use(userRouter);
+app.use(authRouter);
+app.use(sessionRouter);
 
 export async function init() {
   await connectDatabase();
