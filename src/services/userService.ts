@@ -35,17 +35,3 @@ export async function getUser(id: number) {
     createdAt: dayjs(user.createdAt).format('DD/MM/YYYY'),
   };
 }
-
-export async function deleteUser(id: number) {
-  const user = await getRepository(User)
-    .find({
-      where: [
-        { id },
-      ],
-    });
-  if (user.length === 0) return false;
-
-  await getRepository(User).remove(user);
-
-  return true;
-}
