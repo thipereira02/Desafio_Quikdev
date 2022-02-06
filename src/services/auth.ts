@@ -1,5 +1,3 @@
-import jwt from 'jsonwebtoken';
-
 import LogInData from '../interfaces/logIn';
 import User from '../entities/User';
 import Session from '../entities/Session';
@@ -14,9 +12,8 @@ export async function signIn(userData: LogInData) {
   const user = await User.findByEmailAndPassword(email, password);
   if (!user) return false;
 
-  const token = jwt.sign({
-    userId: user.id,
-  }, process.env.JWT_SECRET);
+  const token = await Session.generateToken(password, user.password);
+  if (!token) return undefined;
 
   await Session.createNew(user.id, token);
 

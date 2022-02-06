@@ -8,6 +8,7 @@ import connectDatabase from './database';
 
 import * as userController from './controllers/userController';
 import * as authController from './controllers/auth';
+import tokenValidationMiddleware from './middlewares/tokenValidationMiddleware';
 
 const app = express();
 app.use(cors());
