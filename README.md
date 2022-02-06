@@ -36,7 +36,7 @@ git clone https://github.com/thipereira02/Desafio_Quikdev
 2. Set the environment variables by following these steps:
     - 3.1 Create a ``.env`` file in the folder root
     - 3.2 Copy the content of the ``.env.example`` into it
-    - 3.3 Set the ``DATABASE_URL`` in this format: "postgres://user:password@host:port/fregister"
+    - 3.3 Set the ``DATABASE_URL`` in this format: "postgres://user:password@host:port/register"
     - 3.4 Set the ``PORT`` for 4000
 3. In your terminal, go back to the root folder and install the dependencies
 ```bash
